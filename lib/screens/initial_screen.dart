@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study/components/task.dart';
+import 'package:flutter_study/data/task_inherited.dart';
+import 'package:flutter_study/screens/form_screen.dart';
 
-class InitialScrenn extends StatefulWidget {
-  const InitialScrenn({super.key});
+class InitialScreen extends StatefulWidget {
+  const InitialScreen({super.key});
 
   @override
-  State<InitialScrenn> createState() => _InitialScrennState();
+  State<InitialScreen> createState() => _InitialScreenState();
 }
 
-class _InitialScrennState extends State<InitialScrenn> {
-  bool opacidade = true;
-
+class _InitialScreenState extends State<InitialScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,29 +18,21 @@ class _InitialScrennState extends State<InitialScrenn> {
         leading: Container(),
         title: const Text('Tarefas'),
       ),
-      body: AnimatedOpacity(
-        opacity: opacidade ? 1 : 0,
-        duration: const Duration(milliseconds: 800),
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: const [
-            Task('Aprender Flutter na aluraaaaaa', 'assets/images/bird.png', 3),
-            Task('Aprender Flutter', 'assets/images/bird.png', 2),
-            Task('Aprender Flutter', 'assets/images/bird.png', 5),
-            Task('Aprender Flutter', 'assets/images/bird.png', 1),
-            SizedBox(
-              height: 80,
-            )
-          ],
-        ),
+      body: ListView(
+        scrollDirection: Axis.vertical,
+        children: TaskInherited.of(context).taskList,
+        padding: EdgeInsets.only(top: 8, bottom: 70),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            opacidade = !opacidade;
-          });
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (contextNew) => FormScreen(taskContext: context,),
+            ),
+          );
         },
-        child: const Icon(Icons.remove_red_eye),
+        child: const Icon(Icons.add),
       ),
     );
   }
