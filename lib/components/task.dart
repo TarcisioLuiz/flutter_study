@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_study/data/task_dao.dart';
 
 import 'difficulty.dart';
 
@@ -59,13 +60,13 @@ class _TaskState extends State<Task> {
                         borderRadius: BorderRadius.circular(4),
                         child: assetOrNetwork()
                             ? Image.asset(
-                                widget.foto,
-                                fit: BoxFit.cover,
-                              )
+                          widget.foto,
+                          fit: BoxFit.cover,
+                        )
                             : Image.network(
-                                widget.foto,
-                                fit: BoxFit.cover,
-                              ),
+                          widget.foto,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Column(
@@ -87,6 +88,9 @@ class _TaskState extends State<Task> {
                       height: 52,
                       width: 52,
                       child: ElevatedButton(
+                          onLongPress: () {
+                            TaskDao().delete(widget.nome);
+                          },
                           onPressed: () {
                             setState(() {
                               widget.nivel++;
