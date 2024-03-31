@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_study/components/task.dart';
-import 'package:flutter_study/data/task_inherited.dart';
-import 'package:flutter_study/screens/form_screen.dart';
+import 'package:flutter_study/app/pages/form_screen.dart';
 
-import '../data/task_dao.dart';
+import '../../components/task.dart';
+import '../../data/task_dao.dart';
+
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});

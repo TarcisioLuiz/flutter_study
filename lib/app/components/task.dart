@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_study/data/task_dao.dart';
 
+import '../data/task_dao.dart';
 import 'difficulty.dart';
 
 class Task extends StatefulWidget {

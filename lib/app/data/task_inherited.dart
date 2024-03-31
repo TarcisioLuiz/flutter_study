@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_study/components/task.dart';
+import 'package:flutter_study/app/components/task.dart';
 
 class TaskInherited extends InheritedWidget {
   TaskInherited({
