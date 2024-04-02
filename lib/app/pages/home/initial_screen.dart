@@ -4,7 +4,6 @@ import 'package:flutter_study/app/pages/form_screen.dart';
 import '../../components/task.dart';
 import '../../data/task_dao.dart';
 
-
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
 
@@ -19,9 +18,13 @@ class _InitialScreenState extends State<InitialScreen> {
       appBar: AppBar(
         leading: Container(),
         actions: [
-          IconButton(onPressed: (){setState(() {
-            print('Recarregando a tela');
-          });}, icon: Icon(Icons.refresh))
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  print('Recarregando a tela');
+                });
+              },
+              icon: Icon(Icons.refresh))
         ],
         title: const Text('Tarefas'),
       ),
@@ -102,8 +105,8 @@ class _InitialScreenState extends State<InitialScreen> {
               ),
             ),
           ).then((value) => setState(() {
-            print('Recarregando a tela inicial');
-          }));
+                print('Recarregando a tela inicial');
+              }));
         },
         child: const Icon(Icons.add),
       ),
