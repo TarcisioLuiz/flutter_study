@@ -22,6 +22,7 @@ class _InitialScreenTestState extends State<InitialScreenTest> {
   void initState() {
     super.initState();
     cubit = BlocProvider.of<TaskCubit>(context);
+    cubit.listTasks();
   }
 
   @override
@@ -33,6 +34,7 @@ class _InitialScreenTestState extends State<InitialScreenTest> {
           IconButton(
               onPressed: () {
                 setState(() {
+                  cubit.listTasks();
                   print('Recarregando a tela');
                 });
               },
@@ -45,8 +47,8 @@ class _InitialScreenTestState extends State<InitialScreenTest> {
         child: BlocBuilder(
           bloc: cubit,
             builder: (context, state) {
-              switch (state) {
-                case InitalTaskState():
+
+                if (state is InitalTaskState) {
                   return const Center(
                     child: Column(
                       children: [
@@ -58,7 +60,8 @@ class _InitialScreenTestState extends State<InitialScreenTest> {
                       ],
                     ),
                   );
-                case LoadingTaskState():
+                }
+                else if (state is LoadingTaskState) {
                   return const Center(
                     child: Column(
                       children: [
@@ -67,10 +70,10 @@ class _InitialScreenTestState extends State<InitialScreenTest> {
                       ],
                     ),
                   );
-                case LoadedTaskState():
+                } else if (state is LoadedTaskState) {
                   return _buildTaskList(state.tasks);
-              }
-              return _buildTaskList(cubit.tasks);
+                } else {
+              return _buildTaskList(cubit.tasks); }
             }),
       ),
       floatingActionButton: FloatingActionButton(
@@ -93,11 +96,20 @@ class _InitialScreenTestState extends State<InitialScreenTest> {
   }
 
   Widget _buildTaskList(List<Task> tasks) {
-    return ListView.builder(
-        itemCount: tasks.length,
-        itemBuilder: (_, index) {
-          final Task tarefa = tasks[index];
-          return tarefa;
-        });
+    return BlocProvider.value(
+      value: TaskCubit(), // substitua 'seuCubit' pelo seu cubit
+      child: BlocBuilder<TaskCubit, TaskState>(
+        builder: (context, state) {
+          return ListView.builder(
+            itemCount: tasks.length,
+            itemBuilder: (_, index) {
+              final Task tarefa = tasks[index];
+              return tarefa;
+            },
+          );
+        },
+      ),
+    );
   }
+
 }

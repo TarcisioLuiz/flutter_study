@@ -142,10 +142,8 @@ class _FormScreenTestState extends State<FormScreenTest> {
                   ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          Task task;
-                            task = Task(nameController.text, imageController.text,
+                          Task task = Task(nameController.text, imageController.text,
                                 int.parse(difficultyController.text));
-                          TaskDao().save(task);
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content: Text('Criando nova tarefa')));
